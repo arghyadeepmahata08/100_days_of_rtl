@@ -1,0 +1,9 @@
+module d_ff_async(input clk, input d, input rst , output reg q);
+
+always @(posedge clk or posedge rst) begin
+if(rst)
+q<=0;
+else 
+q<=d;
+end
+endmodule
