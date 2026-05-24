@@ -366,7 +366,7 @@ If you find this repository useful, please leave a ⭐ and consider starting you
 
 <div align="center">
 
-**Built one module at a time · Started [START DATE] · Target completion [END DATE]**
+**Built one module at a time · Started 12/05/2026 · Target completion 19/08/2026**
 
 `#RTLDesign` `#VLSI` `#Verilog` `#SystemVerilog` `#ChipDesign` `#ASIC` `#100DaysOfRTL`
 
