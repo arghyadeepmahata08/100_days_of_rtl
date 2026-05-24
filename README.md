@@ -166,36 +166,102 @@ RTL Design Flow
 
 ---
 
-## 🔧 Tools & Setup
-🧪 Simulation & Verification Tools
-Vivado
+## 🔧 Tools & Workflow
 
-Used for:
+This challenge uses a professional two-tool flow that mirrors real FPGA/ASIC design environments.
 
-RTL simulation
-Waveform debugging
-Schematic visualization
-Synthesis checks
-Resource understanding
-# Typical Vivado Flow
-xvlog design.sv tb.sv
-xelab tb -s sim_out
-xsim sim_out
+---
 
-QuestaSim / ModelSim
+### ✏️ Code Editor — Visual Studio Code
 
-Used mainly for:
-SystemVerilog simulation
-Assertion verification
-Advanced debugging
-UVM-oriented workflows
-vlog design.sv tb.sv
-vsim tb
+All RTL and testbench files are written in **VS Code** with the following extensions:
+
+| Extension | Purpose |
+|---|---|
+| [Verilog-HDL/SystemVerilog](https://marketplace.visualstudio.com/items?itemName=mshr-h.VerilogHDL) | Syntax highlighting, linting, hover docs |
+| [TerosHDL](https://marketplace.visualstudio.com/items?itemName=teros-technology.teroshdl) | Documentation, block diagram preview |
+| [WaveTrace](https://marketplace.visualstudio.com/items?itemName=wavetrace.wavetrace) | Inline VCD waveform viewer |
+| [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) | Git blame, daily commit tracking |
+
+VS Code settings used for this project (`.vscode/settings.json`):
+
+```json
+{
+  "verilog.linting.linter": "verilator",
+  "verilog.linting.verilator.arguments": "--lint-only -Wall",
+  "files.associations": {
+    "*.v": "verilog",
+    "*.sv": "systemverilog",
+    "*.svh": "systemverilog"
+  },
+  "editor.tabSize": 4,
+  "editor.rulers": [80]
+}
+```
+
+---
+
+### 🔬 Simulation & Functional Verification — QuestaSim
+
+Functional simulation and testbench verification is done in **QuestaSim (Mentor / Siemens EDA)**. QuestaSim is used for Phases 1–5 including UVM.
+
+**Basic simulation flow:**
+
+```tcl
+# Compile RTL and testbench
+vlog -sv rtl/module.sv tb/tb_module.sv
+
+# Simulate
+vsim -c work.tb_module -do "run -all; quit"
+
+# With UVM (Phase 5)
+vlog -sv +incdir+$UVM_HOME/src $UVM_HOME/src/uvm_pkg.sv rtl/*.sv tb/*.sv
+vsim -c work.tb_module +UVM_TESTNAME=base_test -do "run -all; quit"
+```
+
+**QuestaSim waveform setup (used for every day):**
+
+```tcl
+# In the QuestaSim transcript or .do file
+add wave -radix hex /tb_module/*
+add wave -radix bin /tb_module/dut/*
 run -all
+wave zoom full
+```
 
-GTKWave
-Used occasionally for lightweight waveform viewing.
-gtkwave waveform.vcd
+Each day's `sim/` folder contains a `.do` script to reproduce the exact simulation with one command:
+
+```bash
+cd dayXX_module_name/sim/
+vsim -do run.do
+```
+
+---
+
+### 📐 Synthesis, Schematic & Waveform Analysis — Vivado
+
+**Xilinx Vivado** is used for two purposes in this challenge:
+
+**1. RTL Schematic view** — after each module is written, the elaborated schematic is checked in Vivado to verify the synthesis intent matches the RTL design. This catches accidental latch inference, unexpected mux trees, and unintended combinational loops before simulation.
+
+```
+Flow: Open Vivado → Create Project → Add Sources (rtl/*.v or *.sv)
+      → Run Synthesis (or Elaborate only for schematic)
+      → Open Elaborated Design → Schematic
+```
+
+**2. Simulation waveform viewer** — Vivado's built-in simulator (xsim) and waveform viewer are used to capture and annotate waveform screenshots for LinkedIn posts. The `.wcfg` wave config file is committed alongside each day's files so the waveform can be reproduced exactly.
+
+```tcl
+# Vivado xsim flow
+xvlog --sv rtl/module.sv tb/tb_module.sv
+xelab -debug typical work.tb_module
+xsim work.tb_module -gui
+```
+
+**Vivado project files are not committed** (`.xpr`, `.runs/`, `.cache/` are gitignored). Only source RTL, testbenches, and `.wcfg` waveform configs are tracked.
+
+---
 
 ---
 
@@ -280,13 +346,28 @@ If this helps you, leave a ⭐ on the repo — it helps others find it.
 PRs, issues, and discussion are welcome. If you spot a bug in any RTL module or testbench, open an issue.
 
 ---
-
 ## 📜 License
 
-This repository is open source under the [MIT License](LICENSE). Use freely for learning, interview prep, and personal projects. Attribution appreciated but not required.
+This repository is shared for **educational and portfolio purposes**.
+
+The RTL modules, testbenches, and documentation in this repository represent my own original work written as part of the 100 Days of RTL challenge. You are welcome to:
+
+- Read, study, and learn from the code
+- Use it as a reference for your own learning
+- Fork the repository and attempt the challenges yourself
+
+Please **do not copy and submit** this work as your own in interviews, assessments, or academic submissions. The value of this challenge is in the doing — not in having the code.
+
+> **Note on tools:** Vivado is a proprietary tool owned by AMD/Xilinx. QuestaSim is a proprietary tool owned by Siemens EDA. This repository contains only source RTL and testbench files — no tool binaries, no IP cores, and no licensed library files are included or distributed here. All tool usage complies with their respective license agreements.
+
+If you find this repository useful, please leave a ⭐ and consider starting your own public RTL challenge.
 
 ---
+
+<div align="center">
 
 **Built one module at a time · Started [START DATE] · Target completion [END DATE]**
 
 `#RTLDesign` `#VLSI` `#Verilog` `#SystemVerilog` `#ChipDesign` `#ASIC` `#100DaysOfRTL`
+
+</div>
