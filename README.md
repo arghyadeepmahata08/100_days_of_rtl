@@ -41,21 +41,21 @@ RTL Design Flow
 
 | Day | Module | Difficulty | Status | Key Concept |
 |---|---|---|---|---|
-| 01 | N-bit ripple carry adder — behavioral | Medium | ⬜ | Width extension, carry-out |
-| 02 | N-bit adder — structural full-adder chain | Medium | ⬜ | generate/genvar |
-| 03 | Barrel shifter — logical shift (left + right) | Medium | ⬜ | Mux-tree, log₂N stages |
-| 04 | Barrel shifter — arithmetic right shift | Medium | ⬜ | Sign-bit replication |
-| 05 | D flip-flop — sync vs async reset | Medium | ⬜ | Sensitivity list, CLR pin |
-| 06 | Synchronous FIFO — pointer logic + flags | Medium | ⬜ | Full/empty decode, count |
-| 07 | Priority encoder 8-to-3 with valid bit | Medium | ⬜ | casez, don't-care |
-| 08 | Clock divider — even and odd ratio | Medium | ⬜ | Dual-edge phase merge |
-| 09 | Mealy FSM — 1011 detector, overlapping | Medium | ⬜ | Combinational output |
-| 10 | Moore FSM — 1011 detector, non-overlapping | Medium | ⬜ | Registered output, 5 states |
-| 11 | Single-port register file 8×32 | Medium | ⬜ | r0 hardwired, async read |
-| 12 | Parameterized MUX — N inputs, generate | Medium | ⬜ | +: part-select, tree depth |
-| 13 | Gray code encoder and decoder | Medium | ⬜ | XOR chain, CDC prep |
-| 14 | LFSR — Fibonacci maximal-length | Medium | ⬜ | Tap polynomial, BIST |
-| 15 | Pulse-width and both-edge detector | Medium | ⬜ | Edge detection, glitch |
+| 02 | N-bit adder — structural full-adder chain | Medium | ✅ | generate/genvar |
+| 02 | Barrel shifter — logical shift (left + right) | Medium | ✅ | Mux-tree, log₂N stages |
+| 03 | Barrel shifter — arithmetic right shift | Medium | ✅ | Sign-bit replication |
+| 04 | D flip-flop — sync vs async reset | Medium | ✅ | Sensitivity list, CLR pin |
+| 05 | Synchronous FIFO — pointer logic + flags | Medium | ✅ | Full/empty decode, count |
+| 06 | Priority encoder 8-to-3 with valid bit | Medium | ✅ | casez, don't-care |
+| 07 | Clock divider — even and odd ratio | Medium | ✅ | Dual-edge phase merge |
+| 08 | Mealy FSM — 1011 detector, overlapping | Medium | ✅ | Combinational output |
+| 09 | Moore FSM — 1011 detector, non-overlapping | Medium | ✅ | Registered output, 5 states |
+| 10 | Single-port register file 8×32 | Medium | ✅ | r0 hardwired, async read |
+| 11 | Parameterized MUX — N inputs, generate | Medium | ✅ | +: part-select, tree depth |
+| 12 | Gray code encoder and decoder | Medium | ✅ | XOR chain, CDC prep |
+| 13 | LFSR — Fibonacci maximal-length | Medium | ⬜ | Tap polynomial, BIST |
+| 14 | Pulse-width and both-edge detector | Medium | ⬜ | Edge detection, glitch |
+| 15 | N-bit ripple carry adder — behavioral | Medium | ⬜ | Width extension, carry-out |
 
 ### Phase 2 — SystemVerilog Fundamentals (Days 16–40)
 
@@ -273,7 +273,7 @@ Each day's folder contains a `README.md` with:
 
 ---
 
-**Follow the journey:** [linkedin.com/in/YOUR-PROFILE](www.linkedin.com/in/ami-arghyadeep)
+**Follow the journey:** [www.linkedin.com/in/ami-arghyadeep](www.linkedin.com/in/ami-arghyadeep)
 
 If this helps you, leave a ⭐ on the repo — it helps others find it.
 
