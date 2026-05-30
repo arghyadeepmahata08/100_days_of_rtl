@@ -1,4 +1,4 @@
-# SystemVerilog Ready-Valid Bus Protocol Verification ECE Project
+# Day-16 (System Verilog interface implementation using master slave configuration)
 
 This repository contains a cycle-accurate implementation and testbench verification of a custom **Master-Slave Bus Protocol** using SystemVerilog interfaces, modports, and an FSM-driven architecture.
 
